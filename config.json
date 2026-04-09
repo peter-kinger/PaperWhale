@@ -1,0 +1,73 @@
+{
+  "model_providers": {
+    "openai": {
+      "name": "OpenAI GPT-4o (支持视觉)",
+      "api_base": "https://api.openai.com/v1",
+      "model": "gpt-4o",
+      "api_key_env": "OPENAI_API_KEY",
+      "context_limit_chars": 100000,
+      "vision": true,
+      "description": "128k tokens，支持图片理解"
+    },
+    "anthropic": {
+      "name": "Anthropic Claude (支持视觉)",
+      "api_base": "https://api.anthropic.com/v1",
+      "model": "claude-3-5-sonnet-20241022",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "context_limit_chars": 100000,
+      "vision": true,
+      "description": "200k tokens，支持图片理解"
+    },
+    "deepseek": {
+      "name": "DeepSeek",
+      "api_base": "https://api.deepseek.com/v1",
+      "model": "deepseek-chat",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "context_limit_chars": 30000,
+      "vision": false,
+      "description": "64k tokens，不支持图片理解"
+    },
+    "zhipu": {
+      "name": "智谱GLM",
+      "api_base": "https://open.bigmodel.cn/api/paas/v4",
+      "model": "glm-4",
+      "api_key_env": "ZHIPU_API_KEY",
+      "context_limit_chars": 30000,
+      "vision": false,
+      "description": "128k tokens，不支持图片理解"
+    },
+    "qwen": {
+      "name": "阿里通义千问",
+      "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "model": "qwen-max",
+      "api_key_env": "QWEN_API_KEY",
+      "context_limit_chars": 30000,
+      "vision": false,
+      "description": "最高32k tokens，不支持图片理解"
+    },
+    "qwen_vl": {
+      "name": "阿里通义千问-VL (支持视觉)",
+      "api_base": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "model": "qwen-vl-plus",
+      "api_key_env": "QWEN_API_KEY",
+      "context_limit_chars": 30000,
+      "vision": true,
+      "description": "支持图片理解"
+    },
+    "siliconflow": {
+      "name": "SiliconFlow (DeepSeek-V3)",
+      "api_base": "https://api.siliconflow.cn/v1",
+      "model": "deepseek-ai/DeepSeek-V3",
+      "api_key_env": "SILICONFLOW_API_KEY",
+      "context_limit_chars": 30000,
+      "vision": false,
+      "description": "64k tokens，不支持图片理解"
+    }
+  },
+  "active_provider": "siliconflow",
+  "pdf_input_folder": "./input_pdfs",
+  "output_folder": "./output_docs",
+  "summary_folder": "./summary_docs",
+  "max_tokens": 4096,
+  "temperature": 0.7
+}
