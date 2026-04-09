@@ -1,135 +1,168 @@
-# PaperWhale
+# 🐋 PaperWhale
 
-AI驱动的学术论文阅读与分析工具，支持多模型、多模态（文本+图表）分析。
+> **像鲸鱼一样快速吞遍文献，同时按照你的胃口吃饱**
+>
+> Swallow academic papers like a whale — fast, thorough, and perfectly sized for your appetite.
 
-## 功能特性
+[![GitHub stars](https://img.shields.io/github/stars/peter-kinger/PaperWhale?style=for-the-badge&logo=github)](https://github.com/peter-kinger/PaperWhale/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/peter-kinger/PaperWhale?style=for-the-badge&logo=github)](https://github.com/peter-kinger/PaperWhale/network/members)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8+-green?style=for-the-badge&logo=python)](https://www.python.org/)
+[![Last Commit](https://img.shields.io/github/last-commit/peter-kinger/PaperWhale/main?style=for-the-badge&logo=github)](https://github.com/peter-kinger/PaperWhale/commits/main)
 
-- **多模型支持**: OpenAI GPT-4o、Anthropic Claude、DeepSeek、通义千问等
-- **多模态分析**: 支持从PDF中提取图表图片，发送给视觉模型分析
-- **上下文管理**: 自动检测文本长度，超限时主动报错并提供解决方案
-- **灵活Prompt**: 内置多种分析模板，支持完全自定义
-- **批量处理**: 支持整个文件夹批量分析，自动生成汇总文档
+---
 
-## 支持的模型
+## ✨ 核心特性
 
-| 模型 | 视觉支持 | 上下文限制 |
-|------|----------|------------|
-| GPT-4o | ✓ | ~100k字符 |
-| Claude 3.5 Sonnet | ✓ | ~100k字符 |
-| 通义千问VL | ✓ | ~30k字符 |
-| DeepSeek | ✗ | ~30k字符 |
-| 智谱GLM | ✗ | ~30k字符 |
+| 特性 | 说明 |
+|:---|:---|
+| 🧠 **多模型支持** | GPT-4o、Claude 3.5 Sonnet、DeepSeek、通义千问VL、智谱GLM |
+| 👁️ **多模态分析** | 从 PDF 提取图表图片，发送给视觉模型深度理解 |
+| 📏 **上下文管理** | 自动检测文本长度，超限时主动报错，防止截断 |
+| 🎯 **6种分析模板** | 默认深度分析 / 快速扫描 / 方法论 / 批判评审 / ABM / 气候模型 |
+| 📚 **批量处理** | 文件夹批量分析，自动生成汇总文档 |
+| 🔧 **完全可定制** | 自定义 Prompt 模板，按你的需求打造专属分析流程 |
 
-## 安装
+---
+
+## 🚀 快速开始
+
+### 安装
 
 ```bash
-pip install pdfplumber pymupdf requests
-
-# 或一次性安装所有依赖
+git clone https://github.com/peter-kinger/PaperWhale.git
+cd PaperWhale
 pip install -r requirements.txt
 ```
 
-## 配置
+### 配置
 
-复制并编辑 `config.json`：
+编辑 `config.json` 设置你的 API Key：
 
 ```json
 {
   "active_provider": "openai",
   "model_providers": {
-    "openai": {
-      "api_key_env": "OPENAI_API_KEY"
-    }
+    "openai": { "api_key_env": "OPENAI_API_KEY" },
+    "anthropic": { "api_key_env": "ANTHROPIC_API_KEY" },
+    "deepseek": { "api_key_env": "DEEPSEEK_API_KEY" }
   }
 }
 ```
 
 设置环境变量：
+
 ```bash
-export OPENAI_API_KEY="your-api-key"
-export ANTHROPIC_API_KEY="your-api-key"
-export DEEPSEEK_API_KEY="your-api-key"
-export QWEN_API_KEY="your-api-key"
+export OPENAI_API_KEY="your-key"
+export ANTHROPIC_API_KEY="your-key"
 ```
 
-## 使用
-
-### 命令行
+### 使用
 
 ```bash
-# 默认分析
+# 默认分析（深度分析）
 python main.py --input ./input_pdfs
 
-# 使用指定模型
-python main.py --input ./input_pdfs --provider openai
+# 快速扫描
+python main.py --input ./input_pdfs --prompt quick_scan
 
-# 使用指定模板
-python main.py --input ./input_pdfs --prompt abm_modeling
+# 指定模型
+python main.py --input ./input_pdfs --provider anthropic
 
-# 自定义Prompt
-python main.py --input ./input_pdfs --custom-prompt "你的分析要求"
+# 自定义分析要求
+python main.py --input ./input_pdfs --custom-prompt "重点分析方法的创新性"
 
 # 列出所有模板
-python --list-prompts
+python main.py --list-prompts
 ```
 
-### Python API
+---
 
-```python
-from doc_generator import DocGenerator
+## 📊 支持的模型
 
-generator = DocGenerator()
-result = generator.analyze_single_paper("path/to/paper.pdf")
+| 模型 | 视觉支持 | 上下文限制 | 特点 |
+|:---|:---:|:---:|:---|
+| GPT-4o | 👁️ | ~100k | 综合最强 |
+| Claude 3.5 Sonnet | 👁️ | ~100k | 长文本优秀 |
+| 通义千问VL | 👁️ | ~30k | 中文友好 |
+| DeepSeek | — | ~30k | 性价比高 |
+| 智谱GLM | — | ~30k | 中文优化 |
 
-if result.success:
-    print(result.full_analysis)
-    generator.save_single_analysis(result)
+---
+
+## 🎨 分析模板
+
+| 模板 | 适用场景 |
+|:---|:---|
+| `default` | 深度论文精读 — 工作讲解 / 研究总结 / 图表分析 / 核心贡献 |
+| `quick_scan` | 快速了解论文大意 |
+| `methodology` | 方法论专项分析 |
+| `critical_review` | 批判性评审与挑错 |
+| `abm_modeling` | 多主体建模研究专项 |
+| `climate_modeling` | 气候模型研究专项 |
+
+---
+
+## 🔬 项目架构
+
+```
+PaperWhale/
+├── api_client.py        # 🤖 多模型 API 客户端（视觉多模态支持）
+├── pdf_reader.py        # 📄 PDF 文本与图表提取
+├── doc_generator.py     # 📝 分析结果生成与 Prompt 管理
+├── main.py              # 🚪 命令行入口
+├── config.json          # ⚙️ 配置文件
+├── custom_prompts.py    # 📋 自定义 Prompt 模板
+├── prompts.py           # 📚 内置分析模板
+├── requirements.txt     # 📦 依赖清单
+├── tests/               # 🧪 单元测试（46 个用例）
+│   ├── test_pdf_reader.py
+│   ├── test_api_client.py
+│   └── test_doc_generator.py
+├── input_pdfs/          # 📥 输入 PDF 文件夹
+├── output_docs/         # 📤 单篇分析输出
+└── summary_docs/        # 📑 批量汇总文档
 ```
 
-## 分析模板
+---
 
-| 模板 | 说明 |
-|------|------|
-| `default` | 深度分析：工作讲解、研究总结、图表讲解、核心贡献 |
-| `quick_scan` | 快速扫描，简洁输出 |
-| `methodology` | 方法论聚焦 |
-| `critical_review` | 批判性评审 |
-| `abm_modeling` | 多主体建模专项 |
-| `climate_modeling` | 气候模型专项 |
-
-## 测试
+## 🧪 测试
 
 ```bash
 # 运行所有测试
 python -m unittest discover -s tests -v
 
-# 运行指定模块测试
+# 分模块运行
 python -m unittest tests.test_pdf_reader -v
 python -m unittest tests.test_api_client -v
 python -m unittest tests.test_doc_generator -v
 ```
 
-## 项目结构
+---
+
+## 🌟 与鲸鱼共游
 
 ```
-ai_pdf_reader/
-├── api_client.py          # API客户端模块
-├── config.json            # 配置文件
-├── custom_prompts.py      # 自定义Prompt配置
-├── doc_generator.py       # 文档生成器
-├── main.py                # 主入口
-├── pdf_reader.py          # PDF读取模块
-├── prompts.py             # 内置Prompt模板
-├── requirements.txt       # 依赖列表
-├── tests/                 # 测试套件
-│   ├── test_pdf_reader.py
-│   ├── test_api_client.py
-│   └── test_doc_generator.py
-├── input_pdfs/            # 输入PDF文件夹
-├── output_docs/           # 输出文档文件夹
-└── summary_docs/          # 汇总文档文件夹
+     _
+    ( )   PaperWhale 🐋
+   _| |__   "海量文献，一口鲸吞"
+  (_) (_)
 ```
 
-## License
+**为什么叫 PaperWhale？**
 
-MIT
+- 🐋 **鲸吞** — 像鲸鱼一样快速吞下海量文献
+- 🎯 **精准** — 按照你的胃口（需求）精准分析
+- 📈 **成长** — 吃得越多，积累越深（批量分析 + 汇总）
+
+---
+
+## 📄 License
+
+MIT License - 详见 [LICENSE](LICENSE) 文件
+
+---
+
+<p align="center">
+  <strong>如果对你有帮助，欢迎 star ⭐ 和 fork 🍴</strong>
+</p>
